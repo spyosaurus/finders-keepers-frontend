@@ -1,24 +1,13 @@
 import React from 'react';
-// import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import { signupRequest, signinRequest } from '../../action/auth-action';
-import AuthForm from '../auth-form/auth-form';
-// import { render } from 
+// import AuthForm from '../auth-form/auth-form';
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showAuth: false, 
-    };
-    this.showAuthForm = this.showAuthForm.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
 
-  showAuthForm() {
-    this.setState({ showAuth: true });
-
-    let landingForm = document.getElementsByClassName('landing-form')[0];
-  }
+  //   this.showAuthForm = this.showAuthForm.bind(this);
+  // }
+  
   render() {
     return (
       <div className='dashboard'>

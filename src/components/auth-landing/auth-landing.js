@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as authActions from '../../actions/auth';
+
 import autoBind from '../../utils';
 import AuthForm from '../auth-form/auth-form';
 
@@ -20,8 +21,9 @@ class AuthLanding extends React.Component {
       .then(() => {
         this.props.history.push(routes.DASHBOARD_ROUTE);
       })
-  .catch(console.eror); // eslint-disable-line
+      .catch(console.eror); // eslint-disable-line
   }
+
   handleSignup(user) {
     return this.props.pDoSignup(user)
       .then(() => {
@@ -31,9 +33,12 @@ class AuthLanding extends React.Component {
   }
 
   render() {
-    // const rootJSX = <div>
-    //   <h2> FINDER'S KEEPERS </h2>
-    //   <Link to='/signup'>
+    const rootJSX = <div>
+    <h2> Finders Keepers </h2>
+    <Link to='/signup'> Host </Link>
+    <Link to='/login'> Login to Sluggram </Link>
+  </div>;
+
     const signupJSX = <div>
       <h2>SignUp!</h2>
       <AuthForm onComplete={this.handleSignup}/>
@@ -41,12 +46,18 @@ class AuthLanding extends React.Component {
       <Link to='/login'>Log in to spot the thing</Link>
       </div>;
 
+    const loginJSX = <div>
+      <h2> Login </h2>
+      <AuthForm type='login' onComplete={this.handleLogin}/>
+    </div>;
+
     const { location } = this.props;
 
     return (
         <div className='landing'>
-        {location.pathname === routes.SIGNUP_ROUTE ? signupJSX : undefined }
-        {location.pathname === routes.LOGIN_ROUTE ? loginJSX : undefined }
+          {location.pathname === routes.ROOT_ROUTE ? rootJSX : undefined }
+          {location.pathname === routes.SIGNUP_ROUTE ? signupJSX : undefined }
+          {location.pathname === routes.LOGIN_ROUTE ? loginJSX : undefined }
         </div>
     );
   }
