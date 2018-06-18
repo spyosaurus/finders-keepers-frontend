@@ -11,13 +11,17 @@ class Header extends React.Component {
     const JSXNotLoggedIn =
       <ul>
         <li><Link to={routes.DASHBOARD_ROUTE}> Dashboard </Link></li>
-    </ul>;
+      </ul>;
+    const JSXLoggedIn =
+      <ul>
+        {/* <li><Link to={routes.PROFILE_ROUTE}> Profile </Link></li> */}
+      </ul>;
 
     return (
       <header className='header'>
         <h1> Spot the thing</h1>
         <nav>
-          { this.props.loggedIn ? JSXNotLoggedIn : undefined }
+          { this.props.loggedIn ? JSXLoggedIn : JSXNotLoggedIn }
         </nav>
       </header>
     );

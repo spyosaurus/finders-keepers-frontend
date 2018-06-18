@@ -17,9 +17,9 @@ const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 20;
 
 class AuthForm extends React.Component {
-  consturctor(props) {
+  constructor(props) {
     super(props);
-    this.state = emptyState;
+    this.state = emptyState; // eslint-disable-line 
     autoBind.call(this, AuthForm);
   }
 
