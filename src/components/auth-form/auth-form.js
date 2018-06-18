@@ -19,7 +19,7 @@ const MAX_PASSWORD_LENGTH = 20;
 class AuthForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = emptyState; // eslint-disable-line 
+    this.state = emptyState;
     autoBind.call(this, AuthForm);
   }
 
@@ -53,7 +53,10 @@ class AuthForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { usernameError, passwordError } = this.state;
+    const { 
+      usernameError,
+      passwordError,
+    } = this.state;
 
     if (this.props.type === 'login' || (!usernameError && !passwordError)) {
       this.props.onComplete(this.state);
@@ -83,6 +86,7 @@ class AuthForm extends React.Component {
         value={this.state.username}
         onChange={this.handleChange}
         />
+
       { signupRenderedJSX }
 
       { this.state.passwordDirty ? <p> {this.state.passwordError} </p> : undefined }
@@ -94,6 +98,7 @@ class AuthForm extends React.Component {
         value={this.state.password}
         onChange={this.handleChange}
         />
+        
       <button type='submit'> {type} </button>
     </form>
     );
