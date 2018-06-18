@@ -2,11 +2,11 @@ import React from 'react';
 // import AuthForm from '../auth-form/auth-form';
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.showAuthForm = this.showAuthForm.bind(this);
-  }
+  //   this.showAuthForm = this.showAuthForm.bind(this);
+  // }
   
   render() {
     return (

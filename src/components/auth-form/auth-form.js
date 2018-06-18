@@ -44,7 +44,7 @@ class AuthForm extends React.Component {
   }
   handleChange(event) {
     const { name, value } = event.target;
-    this.setSTate({
+    this.setState({
       [name]: value,
       [`${name}Dirty`]: true,
       [`${name}Error`]: this.handleValidation(name, value),
