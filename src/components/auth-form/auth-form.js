@@ -30,8 +30,8 @@ class AuthForm extends React.Component {
     }
     switch (name) {
       case 'username':
-        if(value.length < 8) {
-          return `Your name must be at least ${MIN_NAME_LENGTH}`
+        if (value.length < 8) {
+          return `Your name must be at least ${MIN_NAME_LENGTH}`;
         }
         return null;
       case 'password':
@@ -70,7 +70,7 @@ class AuthForm extends React.Component {
   render() {
     let { type } = this.props;
 
-    type = type === 'login' ? type: 'signup';
+    type = type === 'login' ? type : 'signup';
 
     const signupRenderedJSX = (type !== 'login'); 
     
