@@ -1,5 +1,4 @@
 import React from 'react';
-import validator from 'validator';
 import PropTypes from 'prop-types';
 import autoBind from './../../utils';
 
