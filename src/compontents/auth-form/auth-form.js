@@ -84,7 +84,26 @@ class AuthForm extends React.Component {
         value={this.state.username}
         onChange={this.handleChange}
         />
-    )
-  }
+      { signupRenderedJSX }
 
+      { this.state.passwordDirty ? <p> {this.state.passwordError} </p> : undefined }
+      <input 
+        className = { this.state.passwordDirty ? 'input-error' : ''}
+        name='password'
+        placeholder='password'
+        type='password'
+        value={this.state.password}
+        onChange={this.handleChange}
+        />
+      <button type='submit'> {type} </button>
+    </form>
+    );
+  }
 }
+
+AuthForm.propTypes = {
+  type: PropTypes.string,
+  onComplete: PropTypes.func,
+};
+
+export default AuthForm;
