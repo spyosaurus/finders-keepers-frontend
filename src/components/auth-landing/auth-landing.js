@@ -14,6 +14,7 @@ class AuthLanding extends React.Component {
     super(props);
     autoBind.call(this, AuthLanding);
   }
+  
   handleLogin(user) {
     return this.props.pDoLogin(user)
       .then(() => {
@@ -25,26 +26,29 @@ class AuthLanding extends React.Component {
     return this.props.pDoSignup(user)
       .then(() => {
         this.props.history.push(routes.DASHBOARD_ROUTE);
-      });
+      })
       .catch(console.error); // eslint-disable-line
   }
 
   render() {
+    // const rootJSX = <div>
+    //   <h2> FINDER'S KEEPERS </h2>
+    //   <Link to='/signup'>
     const signupJSX = <div>
       <h2>SignUp!</h2>
       <AuthForm onComplete={this.handleSignup}/>
       <p>Already have an account?</p>
       <Link to='/login'>Log in to spot the thing</Link>
-      </div>
+      </div>;
 
-      const { location } = this.props;
+    const { location } = this.props;
 
-      return (
+    return (
         <div className='landing'>
         {location.pathname === routes.SIGNUP_ROUTE ? signupJSX : undefined }
         {location.pathname === routes.LOGIN_ROUTE ? loginJSX : undefined }
         </div>
-      );
+    );
   }
 }
 
