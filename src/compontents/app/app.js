@@ -1,4 +1,3 @@
-// Did not add signin exact path, not sure if needed
 // Need to check on AuthLanding, BrowserRouter, AuthRedirect
 
 import React from 'react';
@@ -18,6 +17,7 @@ class App extends React.Component {
           <Header/>
           <Route path='*' component={AuthRedirect}/>
           <Route exact path='/' component={AuthLanding}/>
+          <Route exact path='/signup' component={AuthLanding}/>
           <Route exact path='/login' component={AuthLanding}/>
           <Route exact path='/dashboard' component={Dashboard}/>
         </div>
