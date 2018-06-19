@@ -1,5 +1,5 @@
 export default (state = null, action) => {
-  let { type, payload } = action;
+  const { type, payload } = action;
 
   switch (type) {
     case 'SOCKET_SET': return payload;
