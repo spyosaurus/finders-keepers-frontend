@@ -57,12 +57,4 @@ webpackConfig.module.rules = [
       },
     },
   },
-  {
-    test: /\.scss$/,
-    use: [
-      finalLoader,
-      'css-loader',
-      'sass-loader',
-    ],
-  },
 ];
