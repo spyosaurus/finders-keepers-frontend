@@ -17,10 +17,13 @@ class Dashboard extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
   
-  
   handleSubmit(event) {
     event.preventDefault();
     this.props.socket.emit('SEND_MESSAGE', this.state.input)
+
+    this.props.socket.on('RECEIVE_MESSAGE', (data) => {
+      console.log('RECEIVE MESSAGE', data);
+    });
   }
 
   render() {
