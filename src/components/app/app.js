@@ -1,14 +1,16 @@
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import WaitingRoom from '../waiting-room/waiting-room';
+import Landing from '../landing/landing';
 
 import reducers from '../../reducer/index';
 import thunk from '../../lib/redux-thunk';
 
-import React, {Component, Fragment} from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-
-import Dashboard from '../dashboard/dashboard';
 import Header from '../header/header';
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
@@ -20,8 +22,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (this.props.socket)
+    if (this.props.socket) {
       store.dispatch({ type: 'SOCKET_SET', payload: this.props.socket })
+    }
   }
 
   render() {
@@ -32,7 +35,8 @@ class App extends Component {
           <BrowserRouter>
             <div>
                 <Header/>
-                <Route exact path='/' component={Dashboard}/>
+                <Route exact path='/' component={Landing}/>
+                <Route exact path='/WaitingRoom' component={WaitingRoom}/>
             </div>
           </BrowserRouter>
         </Provider>
@@ -40,5 +44,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  socket: PropTypes.object,
+};
 
 export default App;
