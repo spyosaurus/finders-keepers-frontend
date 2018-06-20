@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('SOCKET IN APP', this.props.socket)
     return (
       <Fragment>
         <Provider store={store}>
