@@ -68,34 +68,32 @@ class Landing extends React.Component {
         isHost: true,
       });
       this.handleRedirectToWaitingRoom();
-    }
-    else if (!this.props.token) {
+    } else if (!this.props.token) {
       this.setState({ authFormDisplay: true }); // eslint-disable-line
     }
   }
 
   handleJoinClick(event) {
+    event.preventDefault();
     this.setState({ joinRoom: true });
-    };
   }
-
+  
   handleJoinRoom(event) {
+    event.preventDefault();
     this.socket.emit('JOIN_ROOM', this.state.roomCode.toUpperCase());
     
-    this.socket.on('JOIN_ROOM_ERROR', message => {
-        console.log('JOIN ROOM ERROR', message);
-    })
+    this.socket.on('JOIN_ROOM_ERROR', (message) => {
+      console.log('JOIN ROOM ERROR', message);
+    });
 
-    this.socket.on('JOINED_ROOM', ()
-
-        this.props.setRoom({
-            roomCode: this.state.roomCode,
-            isHost: false,
-        });
-    )
-        this.handleRedirectToWaitingRoom();
+    this.socket.on('JOINED_ROOM', () => {
+      this.props.setRoom({
+        roomCode: this.state.roomCode,
+        isHost: false,
+      });
+      this.handleRedirectToWaitingRoom();
+    }); 
   }
-
 
   render() {
     console.log('PROPS IN LANDING', this.props);
@@ -105,7 +103,7 @@ class Landing extends React.Component {
           <input name="roomCode" id="roomcode-input" onChange={this.handleChange}/>
           <button type="submit">Join Room</button>
         </form>
-  </div>;
+      </div>;
 
     const authFormJSX = <div>
       <h1> SIGN UP </h1> 
@@ -128,6 +126,7 @@ class Landing extends React.Component {
     );
   }
 }
+
 
 Landing.propTypes = {
   socket: PropTypes.object,

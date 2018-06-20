@@ -1,9 +1,9 @@
 export default (state = null, action) => {
-    let { type, payload } = action;
+  const { type, payload } = action;
 
-    switch (type) {
-        case 'ROOM SET': return payload;
-        case 'ROOM_DELETE': return null;
-        default: return state;
-    }
-}
+  switch (type) {
+    case 'ROOM SET': return payload;
+    case 'ROOM_DELETE': return null;
+    default: return state;
+  }
+};

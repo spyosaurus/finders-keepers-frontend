@@ -5,8 +5,8 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import WaitingRoom from '../waiting-room/waiting-room';
 import Landing from '../landing/landing';
+import WaitingRoom from '../waiting-room/waiting-room';
 
 import reducers from '../../reducer/index';
 import thunk from '../../lib/redux-thunk';
@@ -23,12 +23,12 @@ class App extends Component {
 
   componentDidMount() {
     if (this.props.socket) {
-      store.dispatch({ type: 'SOCKET_SET', payload: this.props.socket })
+      store.dispatch({ type: 'SOCKET_SET', payload: this.props.socket });
     }
   }
 
   render() {
-    console.log('SOCKET IN APP', this.props.socket)
+    console.log('SOCKET IN APP', this.props.socket);
     return (
       <Fragment>
         <Provider store={store}>

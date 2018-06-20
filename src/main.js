@@ -10,7 +10,7 @@ import './styles/main.scss';
 
 const socket = io('http://localhost:3000');
 
-console.log('MAIN SOCKET', socket)
+console.log('MAIN SOCKET', socket);
 
 const appContainer = document.createElement('div');
 document.body.appendChild(appContainer);
