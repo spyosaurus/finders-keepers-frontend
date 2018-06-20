@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Dashboard from '../dashboard/dashboard';
 
 import * as authActions from '../../actions/auth';
 
@@ -35,6 +36,7 @@ class AuthLanding extends React.Component {
   render() {
     const rootJSX = <div>
     <h2> Finders Keepers </h2>
+      <Dashboard/>
     <button><Link to='/signup'> Host </Link></button>
     <button><Link to='/login'> Join </Link></button>
   </div>;
