@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.socket = this.props.socket;
 
     this.state = {
       input:'',
+      socket: this.props.socket,
     };
   autoBind.call(this, Dashboard);
   }
@@ -16,20 +16,14 @@ class Dashboard extends React.Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value })
   }
-
+  
+  
   handleSubmit(event) {
     event.preventDefault();
-
-    this.socket.emit("SEND_MESSAGE", this.state.input)
-
-    this.socket.on('RECEIVE_MESSAGE', (data) => {
-      console.log('__RECEIVE_MESSAGE__', data);
-    });
-
+    this.props.socket.emit('SEND_MESSAGE', this.state.input)
   }
 
   render() {
-    // console.log ('SOCKET DASHBOARD', this.props.socket)
     return (
       <div className='dashboard'>
         <h1> This is the super cool dashboard </h1>

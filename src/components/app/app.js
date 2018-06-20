@@ -32,7 +32,7 @@ class App extends Component {
           <BrowserRouter>
             <div>
                 <Header/>
-                <Route exact path='/dashboard' component={Dashboard}/>
+                <Route exact path='/' component={Dashboard}/>
             </div>
           </BrowserRouter>
         </Provider>
