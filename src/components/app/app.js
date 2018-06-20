@@ -10,6 +10,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Dashboard from '../dashboard/dashboard';
 import Header from '../header/header';
+import Game from '../game/game';
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -32,6 +33,7 @@ class App extends Component {
             <div>
                 <Header/>
                 <Route exact path='/' component={Dashboard}/>
+              <Route exact path='/game' component={Game}/>
             </div>
           </BrowserRouter>
         </Provider>

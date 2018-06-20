@@ -13,6 +13,7 @@ class Header extends React.Component {
         <li><Link to={routes.ROOT_ROUTE}> Home </Link></li>
         <li><Link to={routes.LOGIN_ROUTE}> Login </Link></li>
         <li><Link to={routes.SIGNUP_ROUTE}> Signup </Link></li>
+        <li><Link to={routes.GAME_ROUTE}> Game </Link></li>
       </ul>;
     const JSXLoggedIn =
       <ul>
