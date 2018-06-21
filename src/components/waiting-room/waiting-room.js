@@ -60,7 +60,7 @@ class WaitingRoom extends Component {
       });
     });
     this.props.socket.on('REDIRECT', () => {
-      this.context.router.history.push('/GameRoom');
+      this.context.router.history.push('/game');
     });
   }
 
