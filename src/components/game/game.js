@@ -5,7 +5,7 @@ import autoBind from '../../utils/index';
 import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
 // import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
 // import puzzleImage from '../../../assets/backgrounds/gauster-unsplash.jpg';
-// import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
+ import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
 
 
 const CANVAS_WIDTH = 560;
@@ -13,7 +13,7 @@ const CANVAS_HEIGHT = 560;
 const NUMBER_OF_STARS = 7;
 const STAR_OUTER_RADIUS = 30;
 const STAR_INNER_RADIUS = 15;
-const STAR_STROKE_COLOR = '#ccc';
+const STAR_STROKE_COLOR = '#bbb';
 const STAR_STROKE_WIDTH = 3;
 const STAR_POINTS = 7;
 const starPositions = [];
@@ -38,11 +38,11 @@ class Game extends React.Component {
 
   
   handleTimerDec() {
-    // console.log('timer working', this.state.timeDisplay);
+    console.log('timer working', this.state.timeDisplay);
     if (this.state.timeDisplay > 0) {
-    //  this.setState({ timeDisplay: this.state.timeDisplay - 1 });
+      this.setState({ timeDisplay: this.state.timeDisplay - 1 });
     } else {
-    //  console.log('TIME OUT REACHED');
+      console.log('TIME OUT REACHED');
       this.props.socket.emit('TIME_OVER', this.props.room.code, this.state.score, this.props.room.username); 
       this.context.router.history.push('/scores');
     }
@@ -91,6 +91,7 @@ class Game extends React.Component {
       ctx.closePath();
       ctx.lineWidth = STAR_STROKE_WIDTH;
       ctx.strokeStyle = STAR_STROKE_COLOR;
+      ctx.globalAlpha = 0.4;
       ctx.stroke();
     };
 
@@ -141,7 +142,7 @@ class Game extends React.Component {
       });
     }
     const canvasStyle = {
-      // backgroundImage: `url(${crowdImage})`,
+      backgroundImage: `url(${crowdImage})`,
       backgroundSize: 'cover',
       border: '2px solid gray',
     };
