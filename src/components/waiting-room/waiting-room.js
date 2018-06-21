@@ -21,6 +21,14 @@ class WaitingRoom extends Component {
     autoBind.call(this, WaitingRoom);
   }
 
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
+  handleGameRedirect() {
+    this.props.socket.emit('HOST_REDIRECT', this.props.room.code);
+  }
+
   componentDidMount() {
     if (this.isHost) {
       this.socket.emit('CREATE_ROOM');
@@ -51,10 +59,16 @@ class WaitingRoom extends Component {
         playerNames: names,
       });
     });
+    this.props.socket.on('REDIRECT', () => {
+      this.context.router.history.push('/GameRoom');
+    });
   }
 
   render() {
     console.log('WAITING PROPS', this.props.room.isHost);
+    const startButtonJSX = <div>
+      <button type='button' className='start' onClick= {this.handleGameRedirect}>START GAME</button>
+    </div>;
     return (
             <div>
 
@@ -63,7 +77,7 @@ class WaitingRoom extends Component {
 
             <h1> Number of Players </h1>
             <h2> {this.state.numPlayers} </h2>
-
+              {this.isHost ? startButtonJSX : undefined }
             </div>
     );
   }
