@@ -37,7 +37,7 @@ if (production) {
 
 webpackConfig.module = {};
 
-const finalLoader = production ? MiniCssPlugin.loader : 'style-loader';
+const finalLoader = production ? MiniCssPlugin.loader : 'style-loader'; // eslint-disable-line
 webpackConfig.module.rules = [
   {
     test: /\.(png|svg|jpg|gif)$/,
