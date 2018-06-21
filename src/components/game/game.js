@@ -16,7 +16,7 @@ const STAR_INNER_RADIUS = 15;
 const STAR_STROKE_COLOR = '#ccc';
 const STAR_STROKE_WIDTH = 3;
 const STAR_POINTS = 7;
-let starPositions = [];
+const starPositions = [];
 
 class Game extends React.Component {
   constructor(props) {
@@ -48,61 +48,21 @@ class Game extends React.Component {
     }
   }
 
-  renderCanvas() {
-    const { canvas } = this.refs; // eslint-disable-line
-    const ctx = canvas.getContext('2d');
-    let xCoord = 0;
-    let yCoord = 0;
 
-    setInterval(this.handleTimerDec, 1000);
-
-    const drawStar = (
-      xPos,
-      yPos,
-      starPoints,
-    ) => {
-      let rotation = (Math.PI / 2) * 3;
-      let x = xPos;
-      let y = yPos;
-      const interval = Math.PI / starPoints;
-
-      ctx.beginPath();
-      ctx.moveTo(xPos, yPos - STAR_OUTER_RADIUS);
-      for (let i = 0; i < starPoints; i++) {
-        x = xPos + (Math.cos(rotation) * STAR_OUTER_RADIUS);
-        y = yPos + (Math.sin(rotation) * STAR_OUTER_RADIUS);
-        ctx.lineTo(x, y);
-        rotation += interval;
-
-        x = xPos + (Math.cos(rotation) * STAR_INNER_RADIUS);
-        y = yPos + (Math.sin(rotation) * STAR_INNER_RADIUS);
-        ctx.lineTo(x, y);
-        rotation += interval;
-      }
-      ctx.lineTo(xPos, yPos - STAR_OUTER_RADIUS);
-      ctx.closePath();
-      ctx.lineWidth = STAR_STROKE_WIDTH;
-      ctx.strokeStyle = STAR_STROKE_COLOR;
-      ctx.stroke();
-      starPositions.push([xPos, yPos]);
-    };
-
+  populateStars() {
+    let xCoord;
+    let yCoord;
     for (let i = 0; i < NUMBER_OF_STARS; i++) {
       xCoord = Math.round(Math.random() * (CANVAS_WIDTH - (3 * STAR_OUTER_RADIUS)));
       yCoord = Math.round(Math.random() * (CANVAS_HEIGHT - (3 * STAR_OUTER_RADIUS)));
-
-      ctx.strokeStyle = '#fff';
-      drawStar(xCoord, yCoord, 7);
+      starPositions.push([xCoord, yCoord]);
     }
-    console.log('STAR POSITIONS: ', starPositions);
   }
 
-  rerenderCanvas() {
+  renderCanvas() {
     const { canvas } = this.refs; // eslint-disable-line
     const ctx = canvas.getContext('2d');
-    let xCoord;
-    let yCoord;
-
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     const drawStar = (
       xPos,
@@ -132,21 +92,18 @@ class Game extends React.Component {
       ctx.lineWidth = STAR_STROKE_WIDTH;
       ctx.strokeStyle = STAR_STROKE_COLOR;
       ctx.stroke();
-      starPositions.push([xPos, yPos]);
     };
-    for (let i = 0; i < starPositions.length; i++) {
-      xCoord = starPositions[i][0];
-      yCoord = starPositions[i][1];
 
-      drawStar(xCoord, yCoord, STAR_POINTS);
+    for (let i = 0; i < starPositions.length; i++) {
+      drawStar(starPositions[i][0], starPositions[i][1], STAR_POINTS);
     }
   }
 
   componentDidMount() {
     setInterval(this.handleTimerDec, 1000);
+    this.populateStars();
     this.renderCanvas();
   }
-
 
   handleClick(event) {
     event.preventDefault();
@@ -170,7 +127,7 @@ class Game extends React.Component {
       ) {
         this.setState({ score: this.state.score + 1 });
         starPositions.splice(i, 1);
-        console.log('STAR POSITIONS AFTER TARGET CHECK: ', starPositions);
+        this.renderCanvas();
         return true;
       }
     }
@@ -184,11 +141,11 @@ class Game extends React.Component {
       });
     }
     const canvasStyle = {
-      //  backgroundImage: `url(${crowdImage})`,
+      // backgroundImage: `url(${crowdImage})`,
       backgroundSize: 'cover',
       border: '2px solid gray',
     };
-    let starsToFind = starPositions.length;
+    const starsToFind = starPositions.length;
     return (
       <div className='game'>
       <h1> TIMER(SECONDS): {this.state.timeDisplay} </h1>
