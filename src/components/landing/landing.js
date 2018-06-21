@@ -11,7 +11,7 @@ class Landing extends React.Component {
     super(props);
 
     this.state = {
-      input: '',
+      username: '',
       socket: this.props.socket,
       joinRoom: false,
       roomCode: '',
@@ -28,15 +28,6 @@ class Landing extends React.Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-  
-  //   handleSubmit(event) {
-  //     event.preventDefault();
-  //     this.props.socket.emit('SEND_MESSAGE', this.state.input);
-
-  //     this.props.socket.on('RECEIVE_MESSAGE', (data) => {
-  //       console.log('RECEIVE MESSAGE', data);
-  //     });
-  //   }
 
   handleLogin(user) {
     return this.props.pDoLogin(user)
@@ -66,6 +57,7 @@ class Landing extends React.Component {
       event.preventDefault();
       this.props.setRoom({
         isHost: true,
+        username: this.props.room.username,
       });
       this.handleRedirectToWaitingRoom();
     } else if (!this.props.token) {
@@ -80,7 +72,7 @@ class Landing extends React.Component {
   
   handleJoinRoom(event) {
     event.preventDefault();
-    this.props.socket.emit('JOIN_ROOM', this.state.roomCode.toUpperCase());
+    this.props.socket.emit('JOIN_ROOM', this.state.roomCode.toUpperCase(), this.state.username);
     
     this.props.socket.on('JOIN_ROOM_ERROR', (message) => {
       console.log('JOIN ROOM ERROR', message);
@@ -90,6 +82,7 @@ class Landing extends React.Component {
       this.props.setRoom({
         roomCode: this.state.roomCode,
         isHost: false,
+        username: this.state.username,
       });
       this.handleRedirectToWaitingRoom();
     }); 
@@ -100,6 +93,8 @@ class Landing extends React.Component {
 
     const joinRoomJSX = <div>
           <form id="roomcode-form" onSubmit={this.handleJoinRoom}>
+          <h2> Username </h2>
+          <input name="username" id="username" onChange={this.handleChange}/>
           <input name="roomCode" id="roomcode-input" onChange={this.handleChange}/>
           <button type="submit">Join Room</button>
         </form>
@@ -135,6 +130,7 @@ Landing.propTypes = {
   token: PropTypes.string,
   pDoLogin: PropTypes.func,
   pDoSignup: PropTypes.func,
+  room: PropTypes.object,
 };
 
 const mapStateToProps = state => ({

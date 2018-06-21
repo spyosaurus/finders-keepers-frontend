@@ -30,8 +30,9 @@ class WaitingRoom extends Component {
   }
 
   componentDidMount() {
+    console.log('PROPS IN WAITING ROOM', this.props);
     if (this.isHost) {
-      this.socket.emit('CREATE_ROOM');
+      this.socket.emit('CREATE_ROOM', this.props.room.username);
 
       this.socket.on('SEND_ROOM', (data) => {
         const parsedData = JSON.parse(data);
@@ -41,6 +42,7 @@ class WaitingRoom extends Component {
           code: roomCode,
           isHost: this.isHost,
           roomHost,
+          username: this.props.room.username,
         });
 
         this.setState({ roomCode });
@@ -53,19 +55,20 @@ class WaitingRoom extends Component {
       });
     }
 
-    this.socket.on('TRACK_PLAYERS', (num, names) => {
+    this.socket.on('TRACK_PLAYERS', (num, list) => {
       this.setState({
         numPlayers: num,
-        playerNames: names,
+        playerNames: list,
       });
+      console.log(this.state.playerNames);
     });
     this.props.socket.on('REDIRECT', () => {
-      this.context.router.history.push('/GameRoom');
+      this.context.router.history.push('/game');
     });
   }
 
   render() {
-    console.log('WAITING PROPS', this.props.room.isHost);
+    console.log('WAITING PROPS', this.props);
     const startButtonJSX = <div>
       <button type='button' className='start' onClick= {this.handleGameRedirect}>START GAME</button>
     </div>;
@@ -77,6 +80,11 @@ class WaitingRoom extends Component {
 
             <h1> Number of Players </h1>
             <h2> {this.state.numPlayers} </h2>
+
+            <h1> Player Names </h1>
+            <h2> {this.state.playerNames.join(', ')} </h2>
+
+
               {this.isHost ? startButtonJSX : undefined }
             </div>
     );

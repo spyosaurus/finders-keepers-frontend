@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autoBind from './../../utils';
+import * as roomActions from '../../actions/room-actions';
 
 const emptyState = {
   username: '',
@@ -59,6 +61,9 @@ class AuthForm extends React.Component {
     } = this.state;
 
     if (this.props.type === 'login' || (!usernameError && !passwordError)) {
+      console.log('AUTH FORM USERNAME', this.state.username);
+      this.props.setRoom({ username: this.state.username });
+
       this.props.onComplete(this.state);
       this.setState(emptyState);
     } else {
@@ -108,6 +113,15 @@ class AuthForm extends React.Component {
 AuthForm.propTypes = {
   type: PropTypes.string,
   onComplete: PropTypes.func,
+  setRoom: PropTypes.func,
 };
 
-export default AuthForm;
+const mapStateToProps = state => ({
+  room: state.room,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setRoom: room => dispatch(roomActions.roomSet(room)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);
