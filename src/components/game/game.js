@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import autoBind from '../../utils/index';
-import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
+// import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
 // import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
 // import puzzleImage from '../../../assets/backgrounds/gauster-unsplash.jpg';
 // import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
@@ -9,12 +9,19 @@ import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
 
 const CANVAS_WIDTH = 560;
 const CANVAS_HEIGHT = 560;
+const NUMBER_OF_STARS = 7;
+const STAR_OUTER_RADIUS = 30;
+const STAR_INNER_RADIUS = 15;
+const STAR_STROKE_COLOR = '#ccc';
+const STAR_STROKE_WIDTH = 3;
+const starPositions = [];
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       socket: this.props.socket,
+      score: 0,
     };
     autoBind.call(this, Game);
   }
@@ -22,13 +29,9 @@ class Game extends React.Component {
   componentDidMount() {
     const { canvas } = this.refs; // eslint-disable-line
     const ctx = canvas.getContext('2d');
-    const NUMBER_OF_STARS = 7;
-    const STAR_OUTER_RADIUS = 30;
-    const STAR_INNER_RADIUS = 15;
-    const STAR_STROKE_COLOR = '#ccc';
-    const STAR_STROKE_WIDTH = 3;
     let xCoord = 0;
     let yCoord = 0;
+
 
     const drawStar = (
       xPos,
@@ -58,28 +61,44 @@ class Game extends React.Component {
       ctx.lineWidth = STAR_STROKE_WIDTH;
       ctx.strokeStyle = STAR_STROKE_COLOR;
       ctx.stroke();
+      starPositions.push([xPos, yPos]);
     };
 
     for (let i = 0; i < NUMBER_OF_STARS; i++) {
-      xCoord = Math.random() * (CANVAS_WIDTH - (3 * STAR_OUTER_RADIUS));
-      yCoord = Math.random() * (CANVAS_HEIGHT - (3 * STAR_OUTER_RADIUS));
+      xCoord = Math.round(Math.random() * (CANVAS_WIDTH - (3 * STAR_OUTER_RADIUS)));
+      yCoord = Math.round(Math.random() * (CANVAS_HEIGHT - (3 * STAR_OUTER_RADIUS)));
 
       ctx.strokeStyle = '#fff';
       drawStar(xCoord, yCoord, 7);
     }
+    console.log('STAR POSITIONS: ', starPositions);
   }
 
   handleClick(event) {
     event.preventDefault();
     const {canvas} = this.refs; // eslint-disable-line
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const x = Math.round(event.clientX - rect.left);
+    const y = Math.round(event.clientY - rect.top);
     const coordinates = `X coords: ${x}, Y coords: ${y}`;
-
-    if (this.props.socket) {
-      this.props.socket.emit('SEND_MESSAGE', `PLAYER ${this.props.socket.id} CLICKED AT ${coordinates}`);
+    if (this.targetCheck(x, y)) {
+      if (this.props.socket) {
+        this.props.socket.emit('SEND_MESSAGE', `PLAYER ${this.props.socket.id} CLICKED A TARGET AT ${coordinates}`);
+      }
     }
+  }
+
+  targetCheck(xCoord, yCoord) {
+    for (let i = 0; i < starPositions.length; i++) {
+      if (
+        (Math.abs(xCoord - starPositions[i][0]) < 30) &&
+        (Math.abs(yCoord - starPositions[i][1]) < 30)
+      ) {
+        this.setState({ score: this.state.score + 1 });
+        return true;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -89,11 +108,16 @@ class Game extends React.Component {
       });
     }
     const canvasStyle = {
-      backgroundImage: `url(${crowdImage})`,
+      // backgroundImage: `url(${crowdImage})`,
       backgroundSize: 'cover',
+      border: '2px solid gray',
     };
+    let starsToFind = NUMBER_OF_STARS - this.state.score;
     return (
       <div className='game'>
+        <h3>Stars to Find: {starsToFind}</h3>
+        <h3>Stars Found: {this.state.score}</h3>
+
         <canvas
           style={canvasStyle}
           ref='canvas' // eslint-disable-line
