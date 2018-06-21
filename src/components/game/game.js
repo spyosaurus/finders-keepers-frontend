@@ -5,7 +5,7 @@ import autoBind from '../../utils/index';
 import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
 // import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
 // import puzzleImage from '../../../assets/backgrounds/gauster-unsplash.jpg';
- import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
+// import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
 
 
 const CANVAS_WIDTH = 560;
@@ -22,9 +22,10 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      clock: null,
       socket: this.props.socket,
       timeInterval: 1000,
-      timeDisplay: 30,
+      timeDisplay: 5,
       score: 0,
     };
 
@@ -42,6 +43,8 @@ class Game extends React.Component {
     if (this.state.timeDisplay > 0) {
       this.setState({ timeDisplay: this.state.timeDisplay - 1 });
     } else {
+      console.log('clock', this.state.clock);
+      clearInterval(this.state.clock);
       console.log('TIME OUT REACHED');
       this.props.socket.emit('TIME_OVER', this.props.room.code, this.state.score, this.props.room.username); 
       this.context.router.history.push('/scores');
@@ -63,6 +66,8 @@ class Game extends React.Component {
     const { canvas } = this.refs; // eslint-disable-line
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    const myClock = setInterval(this.handleTimerDec, 1000);
+    this.setState({ clock: myClock });
 
     const drawStar = (
       xPos,
@@ -136,6 +141,7 @@ class Game extends React.Component {
   }
 
   render() {
+    console.log('GAME PROPS', this.props);
     if (this.props.socket) {
       this.props.socket.on('RECEIVE_MESSAGE', (data) => {
         console.log(data);

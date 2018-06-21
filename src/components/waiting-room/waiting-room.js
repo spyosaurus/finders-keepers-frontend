@@ -47,8 +47,6 @@ class WaitingRoom extends Component {
 
         this.setState({ roomCode });
 
-        this.socket.room = roomCode;
-
         this.props.setSocket(this.socket);
 
         console.log('ROOM CODE', this.props.room.code);
