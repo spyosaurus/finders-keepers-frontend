@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import autoBind from '../../utils/index';
 // import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
 // import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
@@ -21,9 +22,29 @@ class Game extends React.Component {
     super(props);
     this.state = {
       socket: this.props.socket,
+      timeInterval: 1000,
+      timeDisplay: 30,
       score: 0,
     };
+
+    
     autoBind.call(this, Game);
+  }
+
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
+  
+  handleTimerDec() {
+    console.log('timer working', this.state.timeDisplay);
+    if (this.state.timeDisplay > 0) {
+      this.setState({ timeDisplay: this.state.timeDisplay - 1 });
+    } else {
+      console.log('TIME OUT REACHED');
+      this.props.socket.emit('TIME_OVER', this.props.room.code, this.state.score, this.props.room.username); 
+      this.context.router.history.push('/scores');
+    }
   }
 
   componentDidMount() {
@@ -32,6 +53,7 @@ class Game extends React.Component {
     let xCoord = 0;
     let yCoord = 0;
 
+    setInterval(this.handleTimerDec, 1000);
 
     const drawStar = (
       xPos,
@@ -115,9 +137,9 @@ class Game extends React.Component {
     let starsToFind = NUMBER_OF_STARS - this.state.score;
     return (
       <div className='game'>
+      <h1> TIMER(SECONDS): {this.state.timeDisplay} </h1>
         <h3>Stars to Find: {starsToFind}</h3>
         <h3>Stars Found: {this.state.score}</h3>
-
         <canvas
           style={canvasStyle}
           ref='canvas' // eslint-disable-line
@@ -130,8 +152,15 @@ class Game extends React.Component {
   }
 }
 
+Game.propTypes = {
+  socket: PropTypes.object,
+  room: PropTypes.object,
+};
+
 const mapStateToProps = state => ({
+  room: state.room,
   socket: state.socket,
 });
+
 
 export default connect(mapStateToProps, null)(Game);

@@ -13,6 +13,7 @@ import thunk from '../../lib/redux-thunk';
 
 import Header from '../header/header';
 import Game from '../game/game';
+import Scores from '../scores/scores';
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -39,6 +40,7 @@ class App extends Component {
                 <Route exact path='/' component={Landing}/>
                 <Route exact path='/WaitingRoom' component={WaitingRoom}/>
                 <Route exact path='/game' component={Game}/>
+                <Route exact path='/scores' component={Scores}/>
             </div>
           </BrowserRouter>
         </Provider>
