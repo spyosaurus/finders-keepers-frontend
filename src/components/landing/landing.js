@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autoBind from '../../utils';
-import { roomSet } from '../../actions/room-actions';
+import * as roomActions from '../../actions/room-actions';
 import * as authActions from '../../actions/auth';
 import AuthForm from '../auth-form/auth-form';
 
@@ -144,7 +144,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setRoom: room => dispatch(roomSet(room)),
+  setRoom: room => dispatch(roomActions.roomSet(room)),
   pDoSignup: user => dispatch(authActions.signupRequest(user)),
   pDoLogin: user => dispatch(authActions.loginRequest(user)),
 });
