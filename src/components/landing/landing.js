@@ -80,7 +80,7 @@ class Landing extends React.Component {
 
     this.props.socket.on('JOINED_ROOM', () => {
       this.props.setRoom({
-        roomCode: this.state.roomCode,
+        code: this.state.roomCode.toUpperCase(),
         isHost: false,
         username: this.state.username,
       });
