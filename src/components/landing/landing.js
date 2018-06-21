@@ -140,7 +140,7 @@ Landing.propTypes = {
 const mapStateToProps = state => ({
   socket: state.socket,
   room: state.room,
-  token: state.token,
+  token: state.auth,
 });
 
 const mapDispatchToProps = dispatch => ({
