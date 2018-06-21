@@ -129,19 +129,19 @@ class Game extends React.Component {
         console.log(data);
       });
     }
-    const canvasStyle = {
-      // backgroundImage: `url(${crowdImage})`,
-      backgroundSize: 'cover',
-      border: '2px solid gray',
-    };
-    let starsToFind = NUMBER_OF_STARS - this.state.score;
+    // const canvasStyle = {
+    //   backgroundImage: `url(${crowdImage})`,
+    //   backgroundSize: 'cover',
+    //   border: '2px solid gray',
+    // };
+    const starsToFind = NUMBER_OF_STARS - this.state.score;
     return (
       <div className='game'>
       <h1> TIMER(SECONDS): {this.state.timeDisplay} </h1>
         <h3>Stars to Find: {starsToFind}</h3>
         <h3>Stars Found: {this.state.score}</h3>
         <canvas
-          style={canvasStyle}
+         className='gameCanvas'
           ref='canvas' // eslint-disable-line
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}
