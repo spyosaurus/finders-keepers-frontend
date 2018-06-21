@@ -1,6 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import routes from '../../routes';
 
 import * as authActions from '../../actions/auth';
 
@@ -10,7 +11,7 @@ class Header extends React.Component {
       <header className='header'>
         <h1> FINDERS KEEPERS - A SEARCH GAME</h1>
         <nav>
-         EMPTY NAV HERE
+          Empty Nav Here
         </nav>
       </header>
     );
