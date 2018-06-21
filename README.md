@@ -10,11 +10,11 @@
 
 ## Version
 
-1.0.1
+1.0.2
 
 ## Description
 
-Finder's Keepers is a competitive, multi-player, brain-game inspired by iSpy. Users have 30 seconds to find and click as many items as they can,before their competitors. The user who is able to find (and keep!) the most items in their round is declared the winner!
+Finder's Keepers is a competitive, multi-player, brain-game inspired by iSpy. Users have 30 seconds to find and click as many stars as they can,before their competitors. The user who is able to find the most items in their round is declared the winner!
 
 ## Build Status
 
@@ -75,6 +75,7 @@ FINDERS_SECRET=yoursecretcodegoeshere
 6. IN THE FRONTEND run the ```npm run test``` command to run testing on frontend.
 7. IN THE FRONTEND run the ```npm run watch``` command to render application to the browser. 
 
+## socket.IO
 
 
 
@@ -91,8 +92,6 @@ FINDERS_SECRET=yoursecretcodegoeshere
 ## Authors
 
 Cara Ottmar, Collin Meredith, Jennifer Piper and Wyatt Pefley
-
-Socket.io:
 
 ## Credits 
 - Heith Smith
