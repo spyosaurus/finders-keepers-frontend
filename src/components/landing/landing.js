@@ -80,13 +80,13 @@ class Landing extends React.Component {
   
   handleJoinRoom(event) {
     event.preventDefault();
-    this.socket.emit('JOIN_ROOM', this.state.roomCode.toUpperCase());
+    this.props.socket.emit('JOIN_ROOM', this.state.roomCode.toUpperCase());
     
-    this.socket.on('JOIN_ROOM_ERROR', (message) => {
+    this.props.socket.on('JOIN_ROOM_ERROR', (message) => {
       console.log('JOIN ROOM ERROR', message);
     });
 
-    this.socket.on('JOINED_ROOM', () => {
+    this.props.socket.on('JOINED_ROOM', () => {
       this.props.setRoom({
         roomCode: this.state.roomCode,
         isHost: false,

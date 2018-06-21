@@ -16,6 +16,7 @@ class WaitingRoom extends Component {
       playerCount: 0,
       roomCode: null,
       playerNames: [],
+      numPlayers: 0,
     };
     autoBind.call(this, WaitingRoom);
   }
@@ -53,6 +54,7 @@ class WaitingRoom extends Component {
   }
 
   render() {
+    console.log('WAITING PROPS', this.props.room.isHost);
     return (
             <div>
 
