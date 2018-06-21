@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autoBind from '../../utils/index';
-// import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
+import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
 // import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
 // import puzzleImage from '../../../assets/backgrounds/gauster-unsplash.jpg';
 // import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
@@ -15,7 +15,8 @@ const STAR_OUTER_RADIUS = 30;
 const STAR_INNER_RADIUS = 15;
 const STAR_STROKE_COLOR = '#ccc';
 const STAR_STROKE_WIDTH = 3;
-const starPositions = [];
+const STAR_POINTS = 7;
+let starPositions = [];
 
 class Game extends React.Component {
   constructor(props) {
@@ -37,17 +38,17 @@ class Game extends React.Component {
 
   
   handleTimerDec() {
-    console.log('timer working', this.state.timeDisplay);
+    // console.log('timer working', this.state.timeDisplay);
     if (this.state.timeDisplay > 0) {
-      this.setState({ timeDisplay: this.state.timeDisplay - 1 });
+    //  this.setState({ timeDisplay: this.state.timeDisplay - 1 });
     } else {
-      console.log('TIME OUT REACHED');
+    //  console.log('TIME OUT REACHED');
       this.props.socket.emit('TIME_OVER', this.props.room.code, this.state.score, this.props.room.username); 
       this.context.router.history.push('/scores');
     }
   }
 
-  componentDidMount() {
+  renderCanvas() {
     const { canvas } = this.refs; // eslint-disable-line
     const ctx = canvas.getContext('2d');
     let xCoord = 0;
@@ -96,6 +97,57 @@ class Game extends React.Component {
     console.log('STAR POSITIONS: ', starPositions);
   }
 
+  rerenderCanvas() {
+    const { canvas } = this.refs; // eslint-disable-line
+    const ctx = canvas.getContext('2d');
+    let xCoord;
+    let yCoord;
+
+
+    const drawStar = (
+      xPos,
+      yPos,
+      starPoints,
+    ) => {
+      let rotation = (Math.PI / 2) * 3;
+      let x = xPos;
+      let y = yPos;
+      const interval = Math.PI / starPoints;
+
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos - STAR_OUTER_RADIUS);
+      for (let i = 0; i < starPoints; i++) {
+        x = xPos + (Math.cos(rotation) * STAR_OUTER_RADIUS);
+        y = yPos + (Math.sin(rotation) * STAR_OUTER_RADIUS);
+        ctx.lineTo(x, y);
+        rotation += interval;
+
+        x = xPos + (Math.cos(rotation) * STAR_INNER_RADIUS);
+        y = yPos + (Math.sin(rotation) * STAR_INNER_RADIUS);
+        ctx.lineTo(x, y);
+        rotation += interval;
+      }
+      ctx.lineTo(xPos, yPos - STAR_OUTER_RADIUS);
+      ctx.closePath();
+      ctx.lineWidth = STAR_STROKE_WIDTH;
+      ctx.strokeStyle = STAR_STROKE_COLOR;
+      ctx.stroke();
+      starPositions.push([xPos, yPos]);
+    };
+    for (let i = 0; i < starPositions.length; i++) {
+      xCoord = starPositions[i][0];
+      yCoord = starPositions[i][1];
+
+      drawStar(xCoord, yCoord, STAR_POINTS);
+    }
+  }
+
+  componentDidMount() {
+    setInterval(this.handleTimerDec, 1000);
+    this.renderCanvas();
+  }
+
+
   handleClick(event) {
     event.preventDefault();
     const {canvas} = this.refs; // eslint-disable-line
@@ -117,6 +169,8 @@ class Game extends React.Component {
         (Math.abs(yCoord - starPositions[i][1]) < 30)
       ) {
         this.setState({ score: this.state.score + 1 });
+        starPositions.splice(i, 1);
+        console.log('STAR POSITIONS AFTER TARGET CHECK: ', starPositions);
         return true;
       }
     }
@@ -130,11 +184,11 @@ class Game extends React.Component {
       });
     }
     const canvasStyle = {
-      // backgroundImage: `url(${crowdImage})`,
+      //  backgroundImage: `url(${crowdImage})`,
       backgroundSize: 'cover',
       border: '2px solid gray',
     };
-    let starsToFind = NUMBER_OF_STARS - this.state.score;
+    let starsToFind = starPositions.length;
     return (
       <div className='game'>
       <h1> TIMER(SECONDS): {this.state.timeDisplay} </h1>
