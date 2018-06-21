@@ -1,16 +1,20 @@
-# finders-keepers-frontend## DOCS
+# Finders-Keepers Frontend Documentaion
 
-## Authors
+### Contents
+* [Build Status](#Build-Status)
 
-Cara Ottmar, Collin Meredith, Jennifer Piper, Wyatt Pefley
+* [Getting Started](#getting-started)
+* [Authors & Credits](#Authors)
+* [Test Coverage](#Tests)
+* [Architecture](#Architecture)
 
 ## Version
 
-1.0.0
+1.0.1
 
 ## Description
 
-Finder's Keepers is a competitive multi-player brain-game. Inspired by iSpy, users have 30 seconds to find and click as many items as they can,before their competitors. The user who is able to find (and keep!) the most items in their round is declared the winner!
+Finder's Keepers is a competitive, multi-player, brain-game inspired by iSpy. Users have 30 seconds to find and click as many items as they can,before their competitors. The user who is able to find (and keep!) the most items in their round is declared the winner!
 
 ## Build Status
 
@@ -27,24 +31,41 @@ Finder's Keepers is a full-stack application, utilizing the following:
 - Continuous Integration: Travis CI
 - Misc: Eslint, dotenv
 
-## Frontend:
+## Frontend
 - View Library: React
 - State Management: Redux
 - Bundler: Webpack
 - Style: Sass
-### Misc: 
+### Misc 
 - Css-loader,
 - Enzyme, Prop-Types,
 - mini-css-extra-plugin, html-webpack-plugin
 
-## Backend:
+## Backend
 - Framework: Express
 - Database: MongoDB
 - Logging: Winston
 - CORS: cors
 
-## ENV Files:
+## ENV Files
+- In your forntend .env file, enter the following:
+```
+NODE_ENV=development
+API_URL=http://localhost:3000
+```
 
+- In your backend .env file, enter the following:
+```
+
+NODE_ENV=development
+PORT=3000
+DEBUG=true
+CORS_ORIGIN=http://localhost:8080
+
+MONGODB_URI=mongodb://localhost/testing
+
+FINDERS_SECRET=yoursecretcodegoeshere
+```
 ## Getting Started:
 1. Fork both FRONTEND AND BACKEND repositories from GitHub.
 2. Clone the repo to your local machine.
@@ -61,15 +82,19 @@ Finder's Keepers is a full-stack application, utilizing the following:
 
 
 
-## Tests:
+## Tests
 - Test Suite: Jest
 - npm run test
 - Backend Coverage:
 - Frontend Coverage:
 
+## Authors
+
+Cara Ottmar, Collin Meredith, Jennifer Piper and Wyatt Pefley
+
 Socket.io:
 
-## Credits: 
+## Credits 
 - Heith Smith
 
 License: MIT

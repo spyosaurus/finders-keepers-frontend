@@ -37,7 +37,7 @@ if (production) {
 
 webpackConfig.module = {};
 
-const finalLoader = production ? MiniCssPlugin.loader : 'style-loader';
+const finalLoader = production ? MiniCssPlugin.loader : 'style-loader'; // eslint-disable-line
 webpackConfig.module.rules = [
   {
     test: /\.(png|svg|jpg|gif)$/,
@@ -56,5 +56,17 @@ webpackConfig.module.rules = [
         cacheDirectory: true,
       },
     },
+  },
+  {
+    test: /\.(jpg|jpeg|gif|png|tiff|svg)$/,
+    exclude: /\.glyph.svg/,
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: 'assets/[name].[ext]',
+        },
+      },
+    ],
   },
 ];
