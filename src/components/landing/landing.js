@@ -33,7 +33,13 @@ class Landing extends React.Component {
     return this.props.pDoLogin(user)
       .then(() => {
         this.setState({ authFormDisplay: false });
-        this.context.router.history.push('/');
+        if (this.props.token) {
+          this.props.setRoom({
+            isHost: true,
+            username: this.props.room.username,
+          });
+          this.context.router.history.push('/WaitingRoom');
+        }
       })
       .catch(console.error); // eslint-disable-line
   }
@@ -42,7 +48,13 @@ class Landing extends React.Component {
     return this.props.pDoSignup(user)
       .then(() => {
         this.setState({ authFormDisplay: false });
-        this.context.router.history.push('/');
+        if (this.props.token) {
+          this.props.setRoom({
+            isHost: true,
+            username: this.props.room.username,
+          });
+          this.context.router.history.push('/WaitingRoom');
+        }
       })
       .catch(console.error); // eslint-disable-line
   }

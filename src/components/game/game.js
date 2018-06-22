@@ -24,10 +24,11 @@ class Game extends React.Component {
       clock: null,
       socket: this.props.socket,
       timeInterval: 1000,
-      timeDisplay: 5,
+      timeDisplay: this.props.host.time,
+      numStars: this.props.host.numStars,
+      backgroundImageNumber: this.props.host.backgroundImageNumber,
       score: 0,
     };
-
     
     autoBind.call(this, Game);
   }
@@ -90,7 +91,7 @@ class Game extends React.Component {
       starPositions.push([xPos, yPos]);
     };
 
-    for (let i = 0; i < NUMBER_OF_STARS; i++) {
+    for (let i = 0; i < this.props.host.numStars; i++) {
       xCoord = Math.round(Math.random() * (CANVAS_WIDTH - (3 * STAR_OUTER_RADIUS)));
       yCoord = Math.round(Math.random() * (CANVAS_HEIGHT - (3 * STAR_OUTER_RADIUS)));
 
@@ -139,7 +140,7 @@ class Game extends React.Component {
       backgroundSize: 'cover',
       border: '2px solid gray',
     };
-    let starsToFind = NUMBER_OF_STARS - this.state.score;
+    let starsToFind = this.props.host.numStars - this.state.score;
     return (
       <div className='game'>
       <h1> TIMER(SECONDS): {this.state.timeDisplay} </h1>
@@ -160,11 +161,13 @@ class Game extends React.Component {
 Game.propTypes = {
   socket: PropTypes.object,
   room: PropTypes.object,
+  host: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   room: state.room,
   socket: state.socket,
+  host: state.host,
 });
 
 
