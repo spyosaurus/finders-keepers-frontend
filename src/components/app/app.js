@@ -1,5 +1,4 @@
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -11,11 +10,12 @@ import WaitingRoom from '../waiting-room/waiting-room';
 import reducers from '../../reducer/index';
 import thunk from '../../lib/redux-thunk';
 
+import About from '../about/about';
 import Header from '../header/header';
 import Game from '../game/game';
 import Scores from '../scores/scores';
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(reducers, applyMiddleware(thunk));
 
 class App extends Component {
   constructor(props) {
@@ -35,12 +35,13 @@ class App extends Component {
       <Fragment>
         <Provider store={store}>
           <BrowserRouter>
-            <div>
+            <div className='main'>
                 <Header/>
                 <Route exact path='/' component={Landing}/>
                 <Route exact path='/WaitingRoom' component={WaitingRoom}/>
                 <Route exact path='/game' component={Game}/>
                 <Route exact path='/scores' component={Scores}/>
+                <Route exact path='/about' component={About}/>
             </div>
           </BrowserRouter>
         </Provider>

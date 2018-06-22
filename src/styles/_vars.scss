@@ -1,20 +1,25 @@
 //--------------------------------------------------------------
 // COLORS
 //--------------------------------------------------------------
-$background-color: rgb(237, 237, 237);
+$background-color: #eee;
+$background-img-1: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/curran-unsplash.jpg);
+$background-img-2: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/flobrant-unsplash.jpg);
+$background-img-3: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/gauster-unsplash.jpg);
+$background-img-4: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/testa-unsplash.jpg);
+
 $font-color: rgba(0,0,0,0.8);
 
 $error: #ff0000;
 
-$accent-color-1: #aaa;
+$accent-color-2: #FFCD29;  // gold
+
+$accent-color-1: #D876FF; // fun purple
+
+
 
 $modal-background: rgba(0,0,0,0.4);
 $modal-content-background: #fff;
 $error-color: #f00;
 
-$nav-link-color: $accent-color-1;
-$nav-link-hover-color: lig
-
-//--------------------------------------------------------------
-// SIZE
-//--------------------------------------------------------------
+$nav-link-color: darken($accent-color-1, 30%);
+$nav-link-hover-color: $accent-color-1;

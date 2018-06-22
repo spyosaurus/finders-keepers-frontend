@@ -1,17 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import routes from '../../routes';
-
+import About from '../about/about';
 import * as authActions from '../../actions/auth';
 
 class Header extends React.Component {
   render() {
     return (
       <header className='header'>
-        <h1> FINDERS KEEPERS - A SEARCH GAME</h1>
+        <h1> FINDERS KEEPERS</h1>
+        <h2>A Search Game</h2>
         <nav>
-          Empty Nav Here
+          <li>
+            <Link to={'/'}>Home</Link>
+          </li>
+          <li>
+            <Link to={'/about'}>About</Link>
+          </li>
+
         </nav>
       </header>
     );

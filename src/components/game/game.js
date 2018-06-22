@@ -2,20 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autoBind from '../../utils/index';
-// import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
-// import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
-// import puzzleImage from '../../../assets/backgrounds/gauster-unsplash.jpg';
-// import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
 
-
-const CANVAS_WIDTH = 560;
+const CANVAS_WIDTH = 920;
 const CANVAS_HEIGHT = 560;
-const NUMBER_OF_STARS = 7;
+const NUMBER_OF_STARS = 30;
 const STAR_OUTER_RADIUS = 30;
 const STAR_INNER_RADIUS = 15;
-const STAR_STROKE_COLOR = '#ccc';
+const STAR_STROKE_COLOR = '#bbb';
 const STAR_STROKE_WIDTH = 3;
+const STAR_POINTS = 7;
 const starPositions = [];
+
 
 class Game extends React.Component {
   constructor(props) {
@@ -26,8 +23,8 @@ class Game extends React.Component {
       timeInterval: 1000,
       timeDisplay: this.props.host.time,
       numStars: this.props.host.numStars,
-      backgroundImageNumber: this.props.host.backgroundImageNumber,
       score: 0,
+      backgroundImageNumber: 1,
     };
     
     autoBind.call(this, Game);
@@ -37,6 +34,9 @@ class Game extends React.Component {
     router: PropTypes.object,
   };
 
+  setBackgroundImageNumber() {
+    this.setState({ backgroundImageNumber: this.props.host.backgroundImageNumber });
+  }
   
   handleTimerDec() {
     console.log('timer working', this.state.timeDisplay);
@@ -51,14 +51,21 @@ class Game extends React.Component {
     }
   }
 
-  componentDidMount() {
+
+  populateStars() {
+    let xCoord;
+    let yCoord;
+    for (let i = 0; i < NUMBER_OF_STARS; i++) {
+      xCoord = Math.round(Math.random() * (CANVAS_WIDTH - (3 * STAR_OUTER_RADIUS)));
+      yCoord = Math.round(Math.random() * (CANVAS_HEIGHT - (3 * STAR_OUTER_RADIUS)));
+      starPositions.push([xCoord, yCoord]);
+    }
+  }
+
+  renderCanvas() {
     const { canvas } = this.refs; // eslint-disable-line
     const ctx = canvas.getContext('2d');
-    let xCoord = 0;
-    let yCoord = 0;
-
-    const myClock = setInterval(this.handleTimerDec, 1000);
-    this.setState({ clock: myClock });
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     const drawStar = (
       xPos,
@@ -87,18 +94,21 @@ class Game extends React.Component {
       ctx.closePath();
       ctx.lineWidth = STAR_STROKE_WIDTH;
       ctx.strokeStyle = STAR_STROKE_COLOR;
+      ctx.globalAlpha = 0.4;
       ctx.stroke();
-      starPositions.push([xPos, yPos]);
     };
 
-    for (let i = 0; i < this.props.host.numStars; i++) {
-      xCoord = Math.round(Math.random() * (CANVAS_WIDTH - (3 * STAR_OUTER_RADIUS)));
-      yCoord = Math.round(Math.random() * (CANVAS_HEIGHT - (3 * STAR_OUTER_RADIUS)));
-
-      ctx.strokeStyle = '#fff';
-      drawStar(xCoord, yCoord, 7);
+    for (let i = 0; i < starPositions.length; i++) {
+      drawStar(starPositions[i][0], starPositions[i][1], STAR_POINTS);
     }
-    console.log('STAR POSITIONS: ', starPositions);
+  }
+
+  componentDidMount() {
+    const myClock = setInterval(this.handleTimerDec, 1000);
+    this.setState({ clock: myClock });
+    this.populateStars();
+    this.setBackgroundImageNumber();
+    this.renderCanvas();
   }
 
   handleClick(event) {
@@ -122,6 +132,8 @@ class Game extends React.Component {
         (Math.abs(yCoord - starPositions[i][1]) < 30)
       ) {
         this.setState({ score: this.state.score + 1 });
+        starPositions.splice(i, 1);
+        this.renderCanvas();
         return true;
       }
     }
@@ -135,19 +147,20 @@ class Game extends React.Component {
         console.log(data);
       });
     }
-    const canvasStyle = {
-      // backgroundImage: `url(${crowdImage})`,
-      backgroundSize: 'cover',
-      border: '2px solid gray',
-    };
-    let starsToFind = this.props.host.numStars - this.state.score;
+
+    const starsToFind = starPositions.length;
+    const { backgroundImageNumber } = this.state;
+    console.log('BACKGROUND IMAGE NUMBER ', backgroundImageNumber);
+    const canvasClassName = ` gameCanvas img${backgroundImageNumber}`;
     return (
       <div className='game'>
-      <h1> TIMER(SECONDS): {this.state.timeDisplay} </h1>
-        <h3>Stars to Find: {starsToFind}</h3>
-        <h3>Stars Found: {this.state.score}</h3>
+        <div className='hud'>
+          <h3> TIMER(SECONDS): <strong>{this.state.timeDisplay}</strong> </h3>
+          <h3>Stars to Find: <strong>{starsToFind}</strong></h3>
+          <h3>Stars Found: <strong>{this.state.score}</strong></h3>
+        </div>
         <canvas
-          style={canvasStyle}
+         className={canvasClassName}
           ref='canvas' // eslint-disable-line
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}

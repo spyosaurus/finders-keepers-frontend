@@ -10,15 +10,14 @@
 
 ## Version
 
-1.0.1
+1.0.2
 
 ## Description
 
-Finder's Keepers is a competitive, multi-player, brain-game inspired by iSpy. Users have 30 seconds to find and click as many items as they can,before their competitors. The user who is able to find (and keep!) the most items in their round is declared the winner!
+Finder's Keepers is a competitive, multi-player, brain-game. Users have a certain amount of time to find and click as many stars as they can before their competitors. The user who is able to find the most items in the alloted time limit is declared the winner.
 
 ## Build Status
 
-UPDATE THIS UPDATE THIS UPDATE THIS
 [![Build Status](https://travis-ci.org/spyosaurus/finders-keepers-frontend.svg?branch=master)](https://travis-ci.org/spyosaurus/finders-keepers-frontend)
 
 ## Architecture
@@ -75,12 +74,9 @@ FINDERS_SECRET=yoursecretcodegoeshere
 6. IN THE FRONTEND run the ```npm run test``` command to run testing on frontend.
 7. IN THE FRONTEND run the ```npm run watch``` command to render application to the browser. 
 
-
-
-
-
-
-
+## socket.IO
+This application uses Socekt.io in order to have multiplayer functionality in real time!
+Players join a socket when they click "host" or "join" and after they have signed in or registered if they do not have an account.
 
 ## Tests
 - Test Suite: Jest
@@ -91,8 +87,6 @@ FINDERS_SECRET=yoursecretcodegoeshere
 ## Authors
 
 Cara Ottmar, Collin Meredith, Jennifer Piper and Wyatt Pefley
-
-Socket.io:
 
 ## Credits 
 - Heith Smith
