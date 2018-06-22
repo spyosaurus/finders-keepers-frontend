@@ -67,7 +67,7 @@ class WaitingRoom extends Component {
 
   render() {
     console.log('WAITING PROPS', this.props);
-    const startButtonJSX = <div>
+    const startButtonJSX = <div className='startGame'>
       <button type='button' className='start' onClick= {this.handleGameRedirect}>START GAME</button>
     </div>;
     return (

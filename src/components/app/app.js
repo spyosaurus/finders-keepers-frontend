@@ -35,7 +35,7 @@ class App extends Component {
       <Fragment>
         <Provider store={store}>
           <BrowserRouter>
-            <div>
+            <div className='main'>
                 <Header/>
                 <Route exact path='/' component={Landing}/>
                 <Route exact path='/WaitingRoom' component={WaitingRoom}/>
