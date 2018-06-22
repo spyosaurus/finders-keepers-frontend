@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Poiret+One:400,700,900);
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -298,17 +299,16 @@ template {
   display: none; }
 
 body {
-  max-width: 980px;
+  width: 960px;
   margin: 1rem auto;
   padding: 0.5rem 2rem;
-  border: 1px solid;
-  border-radius: 10px;
+  border: 5px groove #D876FF;
   font-family: sans-serif;
   font-size: 18px;
-  background: #ededed;
-  min-height: 80vh; }
+  background-color: #eee; }
 
 p, h1, h2, h3, ul {
+  font-family: 'Poiret One', sans-serif;
   color: rgba(0, 0, 0, 0.8); }
 
 ul {
@@ -317,14 +317,23 @@ ul {
 h1 + p {
   margin-top: 0; }
 
+h1 {
+  font-weight: 900; }
+
 h1, h2 {
+  text-align: center;
   margin-bottom: 0.3em; }
+
+h2 {
+  font-family: sans-serif;
+  font-weight: normal; }
 
 .error {
   color: #f00; }
 
-main {
-  padding: 1rem; }
+.main {
+  border: thick groove #D876FF;
+  padding: 1rem 1rem 2rem 1rem; }
 
 input, button {
   font-size: 1em;
@@ -333,27 +342,82 @@ input, button {
   border-radius: 5px; }
 
 button {
-  border-color: #aaa;
-  background-color: #aaa;
+  border-color: #D876FF;
+  background-color: #D876FF;
   color: #fff;
   margin-right: 0.5em; }
   button:hover, button:focus {
     opacity: 0.8; }
 
-nav li {
-  list-style-type: none;
-  display: inline-block;
-  padding: 0 0.5em;
-  border-left: 1px solid #aaa; }
-  nav li:first-of-type {
-    border-left: none;
-    padding-left: 0; }
-  nav li a {
-    color: #aaa;
-    text-decoration: none; }
-    nav li a:hover, nav li a:focus {
-      color: lig; }
+nav {
+  text-align: center;
+  margin-bottom: 1em; }
+  nav li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0 0.5em;
+    border-left: 1px solid #9d00dc; }
+    nav li:first-of-type {
+      border-left: none;
+      padding-left: 0; }
+    nav li a {
+      color: #9d00dc;
+      text-decoration: none; }
+      nav li a:hover, nav li a:focus {
+        color: #D876FF; }
 
-.dashboard {
-  border: 2px solid cyan; }
+.landing, .startGame {
+  text-align: center; }
+
+.game {
+  border-top: thick groove #D876FF; }
+  .game .hud {
+    text-align: center;
+    padding: 1em; }
+  .game h3 {
+    display: inline;
+    border-right: thick groove #D876FF;
+    padding-left: 1em;
+    padding-right: 1em; }
+
+strong {
+  font-weight: bold; }
+
+.gameCanvas {
+  background-size: cover;
+  background-image: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/curran-unsplash.jpg); }
+
+.gameCanvas.img1 {
+  background-image: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/curran-unsplash.jpg); }
+
+.gameCanvas.img2 {
+  background-image: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/flobrant-unsplash.jpg); }
+
+.gameCanvas.img3 {
+  background-image: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/gauster-unsplash.jpg); }
+
+.gameCanvas.img4 {
+  background-image: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/testa-unsplash.jpg); }
+
+.aboutpage img {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  margin-left: 84%;
+  margin-top: -12%; }
+
+.aboutpage {
+  border-top: thick groove #D876FF; }
+  .aboutpage h2 {
+    font-family: 'Poiret One', sans-serif;
+    font-weight: 900; }
+  .aboutpage p {
+    font-family: sans-serif;
+    max-width: 600px;
+    margin-top: 0.5em;
+    margin-left: auto;
+    margin-right: auto; }
+
+.about {
+  margin-right: 20%; }
 
