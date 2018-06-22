@@ -3,6 +3,7 @@ import React from 'react';
 import wyattpic from '../../../assets/wyattpic.jpg';
 import collinpic from '../../../assets/collinpic.jpg';
 import caraface from '../../../assets/caraface.jpg';
+import jenniferpic from '../../../assets/jenniferpic.jpg';
 
 class About extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class About extends React.Component {
           Collin Meredith
         </h2>
         <p className="about">Collin is a software developer and musician. Visit him on <a href="https://github.com/melody2m">Github</a>  or 
-        <a href="https://www.youtube.com/channel/UCTKy4hA0oaEmn9LYmv8kKsw">YouTube</a></p>
+        <a href="https://www.youtube.com/channel/UCTKy4hA0oaEmn9LYmv8kKsw"> YouTube</a></p>
         <img src={'../../../assets/collinpic.jpg'} alt="Collin"/>
         <h2>
           Cara Ottmar
@@ -34,8 +35,14 @@ class About extends React.Component {
           Jennifer Piper
         </h2>
         <p className="about">
-          BIOBIOBIOBIOBIOBIOBIOBIOBIOBIOBIOBIOBIOBIOBIO
+        I’m a web developer with full-stack skills and a passion for front-end excellence. 
+        I love how good code and good design fit together to make great user experiences!
+        <br/> 
+        <a href="https://www.linkedin.com/in/jennifer-piper/">LinkedIn</a>  and
+        <a href="https://www.github.com/jenwill"> GitHub</a>
+        <br/>
         </p>
+        <img src={'../../../assets/jenniferpic.jpg'} alt="Jennifer"/>
         <h2>
           Wyatt Pefley
         </h2>

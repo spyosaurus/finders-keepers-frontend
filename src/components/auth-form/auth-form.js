@@ -79,7 +79,7 @@ class AuthForm extends React.Component {
 
     type = type === 'login' ? type : 'signup';
 
-    const signupRenderedJSX = (type !== 'login'); 
+    const signupRenderedJSX = (type !== 'login');
     
     return (
       <form className='auth-form' noValidate onSubmit={this.handleSubmit} > 
@@ -91,6 +91,7 @@ class AuthForm extends React.Component {
         value={this.state.username}
         onChange={this.handleChange}
         />
+        <br/>
 
       { signupRenderedJSX }
 
@@ -103,7 +104,7 @@ class AuthForm extends React.Component {
         value={this.state.password}
         onChange={this.handleChange}
         />
-        
+        <br/>
       <button type='submit'> {type} </button>
     </form>
     );

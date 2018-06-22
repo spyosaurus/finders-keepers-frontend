@@ -33,7 +33,13 @@ class Landing extends React.Component {
     return this.props.pDoLogin(user)
       .then(() => {
         this.setState({ authFormDisplay: false });
-        this.context.router.history.push('/');
+        if (this.props.token) {
+          this.props.setRoom({
+            isHost: true,
+            username: this.props.room.username,
+          });
+          this.context.router.history.push('/WaitingRoom');
+        }
       })
       .catch(console.error); // eslint-disable-line
   }
@@ -42,7 +48,13 @@ class Landing extends React.Component {
     return this.props.pDoSignup(user)
       .then(() => {
         this.setState({ authFormDisplay: false });
-        this.context.router.history.push('/');
+        if (this.props.token) {
+          this.props.setRoom({
+            isHost: true,
+            username: this.props.room.username,
+          });
+          this.context.router.history.push('/WaitingRoom');
+        }
       })
       .catch(console.error); // eslint-disable-line
   }
@@ -61,13 +73,13 @@ class Landing extends React.Component {
       });
       this.handleRedirectToWaitingRoom();
     } else if (!this.props.token) {
-      this.setState({ authFormDisplay: true }); // eslint-disable-line
+      this.setState({ authFormDisplay: true,  joinRoom: false}); // eslint-disable-line
     }
   }
 
   handleJoinClick(event) {
     event.preventDefault();
-    this.setState({ joinRoom: true });
+    this.setState({ joinRoom: true, authFormDisplay: false });
   }
   
   handleJoinRoom(event) {
@@ -93,23 +105,32 @@ class Landing extends React.Component {
 
     const joinRoomJSX = <div>
           <form id="roomcode-form" onSubmit={this.handleJoinRoom}>
-          <h2> Username </h2>
-          <input name="username" id="username" onChange={this.handleChange}/>
-          <input name="roomCode" id="roomcode-input" onChange={this.handleChange}/>
+          <h3>Choose a Username</h3>
+          <input
+            name="username"
+            placeholder='username'
+            id="username"
+            onChange={this.handleChange}/>
+            <h3>Enter Room Code</h3>
+          <input
+            name="roomCode"
+            placeholder='room code'
+            id="roomcode-input"
+            onChange={this.handleChange}/>
+          <br/>
           <button type="submit">Join Room</button>
         </form>
       </div>;
 
     const authFormJSX = <div>
-      <h1> SIGN UP </h1> 
+      <h3> Sign Up </h3>
         <AuthForm onComplete={this.handleSignup}/>
-      <h1> LOGIN </h1>
+      <h3> Login </h3>
         <AuthForm type='login' onComplete={this.handleLogin}/>
       </div>;
 
     return (
       <div className='landing'>
-        <h1> THIS IS THE LANDING PAGE </h1>
         <button type='button' className='host' onClick={this.handleCreateRoom}>HOST GAME</button>
         <button type='button' className='join' onClick= {this.handleJoinClick}>JOIN GAME</button>
 

@@ -10,7 +10,8 @@ class Header extends React.Component {
   render() {
     return (
       <header className='header'>
-        <h1> FINDERS KEEPERS - A SEARCH GAME</h1>
+        <h1> FINDERS KEEPERS</h1>
+        <h2>A Search Game</h2>
         <nav>
           <li>
             <Link to={'/'}>Home</Link>
