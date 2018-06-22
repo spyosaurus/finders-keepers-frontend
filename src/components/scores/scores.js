@@ -7,7 +7,7 @@ class Scores extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      scores: {},
+      scores: '',
     };
 
     autoBind.call(this, Scores);
@@ -18,8 +18,31 @@ class Scores extends React.Component {
     this.props.socket.emit('UPDATE_SCORES', this.props.room.code);
     this.props.socket.on('SCORES_UPDATED', (data) => {
       const playerScoresObject = data;
-      this.setState({ scores: playerScoresObject });
-      console.log('SCORES OBJECT', playerScoresObject);
+      const scoresArray = [];
+      let scoreString = '';
+
+      Object.keys(playerScoresObject).forEach((key) => {
+        scoresArray.push([key, playerScoresObject[key]]);   
+      });
+
+      scoresArray.sort((a, b) => {
+        return (b[1] - a[1]);
+      });
+
+      for (let i = 0; i < scoresArray.length; i++) {
+        scoreString += scoresArray[i][0]; 
+        scoreString += ': ';
+        scoreString += scoresArray[i][1];
+        scoreString += '\n';
+      }
+
+      const finalScoreString = scoreString.split('\n').map((element, i) => <p key={i}>{element}</p>);
+
+
+      this.setState({ scores: finalScoreString });
+
+      console.log(scoreString);
+      console.log('scorestring', this.state.scores);
     });
   }
 
