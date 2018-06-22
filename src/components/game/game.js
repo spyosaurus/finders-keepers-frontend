@@ -10,7 +10,7 @@ import autoBind from '../../utils/index';
 
 const CANVAS_WIDTH = 560;
 const CANVAS_HEIGHT = 560;
-const NUMBER_OF_STARS = 7;
+const NUMBER_OF_STARS = 30;
 const STAR_OUTER_RADIUS = 30;
 const STAR_INNER_RADIUS = 15;
 const STAR_STROKE_COLOR = '#bbb';
@@ -25,7 +25,7 @@ class Game extends React.Component {
       clock: null,
       socket: this.props.socket,
       timeInterval: 1000,
-      timeDisplay: 5,
+      timeDisplay: 20,
       score: 0,
     };
 
@@ -66,8 +66,6 @@ class Game extends React.Component {
     const { canvas } = this.refs; // eslint-disable-line
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    const myClock = setInterval(this.handleTimerDec, 1000);
-    this.setState({ clock: myClock });
 
     const drawStar = (
       xPos,
@@ -107,6 +105,8 @@ class Game extends React.Component {
 
   componentDidMount() {
     setInterval(this.handleTimerDec, 1000);
+    const myClock = setInterval(this.handleTimerDec, 1000);
+    this.setState({ clock: myClock });
     this.populateStars();
     this.renderCanvas();
   }

@@ -2,19 +2,29 @@
 // COLORS
 //--------------------------------------------------------------
 $background-color: rgb(237, 237, 237);
+$background-color: #eee;
 $background-img: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/curran-unsplash.jpg);
 $font-color: rgba(0,0,0,0.8);
 
 $error: #ff0000;
 
-$accent-color-1: #aaa;
+$accent-color-1: #437F6C;
+$accent-color-2: #FFCD29;  // gold
+
+$accent-color-1: #2FCC25;
+//$accent-color-1: #437F6C; //dark green
+// $accent-color-1:  lighten(navy, 5%);
+$accent-color-1: #F3D3FF; // lilac
+$accent-color-1: #D876FF; // fun purple
+
+
 
 $modal-background: rgba(0,0,0,0.4);
 $modal-content-background: #fff;
 $error-color: #f00;
 
-$nav-link-color: $accent-color-1;
-$nav-link-hover-color: lig
+$nav-link-color: darken($accent-color-1, 30%);
+$nav-link-hover-color: $accent-color-1;
 
 //--------------------------------------------------------------
 // SIZE
