@@ -3,8 +3,6 @@ import * as routes from '../routes';
 import { deleteCookie } from '../utils/cookie';
 import { TOKEN_COOKIE_KEY } from '../constants';
 
-const API_URL = 'http://localhost:3000';
-
 export const setTokenAction = token => ({
   type: 'TOKEN_SET',
   payload: token,

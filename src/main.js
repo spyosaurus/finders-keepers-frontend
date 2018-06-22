@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import App from './components/app/app';
 import './styles/main.scss';
 
-const socket = io('http://localhost:3000');
+const socket = io(API_URL);
 
 console.log('MAIN SOCKET', socket);
 
