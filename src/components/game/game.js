@@ -2,13 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autoBind from '../../utils/index';
-// import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
-// import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
-// import puzzleImage from '../../../assets/backgrounds/gauster-unsplash.jpg';
-// import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
 
-
-const CANVAS_WIDTH = 560;
+const CANVAS_WIDTH = 920;
 const CANVAS_HEIGHT = 560;
 const NUMBER_OF_STARS = 30;
 const STAR_OUTER_RADIUS = 30;
@@ -17,6 +12,7 @@ const STAR_STROKE_COLOR = '#bbb';
 const STAR_STROKE_WIDTH = 3;
 const STAR_POINTS = 7;
 const starPositions = [];
+
 
 class Game extends React.Component {
   constructor(props) {
@@ -148,13 +144,17 @@ class Game extends React.Component {
     }
 
     const starsToFind = starPositions.length;
+    const { backgroundImageNumber } = this.state;
+    const canvasClassName = ` gameCanvas img${backgroundImageNumber}`;
     return (
       <div className='game'>
-      <h1> TIMER(SECONDS): {this.state.timeDisplay} </h1>
-        <h3>Stars to Find: {starsToFind}</h3>
-        <h3>Stars Found: {this.state.score}</h3>
+        <div className='hud'>
+          <h3> TIMER(SECONDS): <strong>{this.state.timeDisplay}</strong> </h3>
+          <h3>Stars to Find: <strong>{starsToFind}</strong></h3>
+          <h3>Stars Found: <strong>{this.state.score}</strong></h3>
+        </div>
         <canvas
-         className='gameCanvas'
+         className={canvasClassName}
           ref='canvas' // eslint-disable-line
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}

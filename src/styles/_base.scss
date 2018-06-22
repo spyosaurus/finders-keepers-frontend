@@ -3,7 +3,7 @@
  @import url('https://fonts.googleapis.com/css?family=Poiret+One:400,700,900');
 
 body {
-  max-width: 980px;
+  width: 960px;
   margin: 1rem auto;
   padding: 0.5rem 2rem;
   border: 5px groove $accent-color-1;
@@ -84,7 +84,40 @@ nav {
 .landing, .startGame {
   text-align: center;
 }
-
+.game {
+  border-top: thick groove $accent-color-1;
+  .hud {
+    text-align: center;
+    padding: 1em;
+  }
+  h3 {
+    display: inline;
+    border-right: thick groove $accent-color-1;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+strong {
+  font-weight: bold;
+}
 .gameCanvas {
-  background: $background-img;
+  background-size: cover;
+  background-image: $background-img-1;
+
+}
+.gameCanvas.img1 {
+  background-image: $background-img-1;
+
+}
+
+.gameCanvas.img2 {
+  background-image: $background-img-2;
+}
+
+.gameCanvas.img3 {
+  background-image: $background-img-3;
+}
+
+.gameCanvas.img4 {
+  background-image: $background-img-4;
 }
