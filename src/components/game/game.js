@@ -5,7 +5,6 @@ import autoBind from '../../utils/index';
 
 const CANVAS_WIDTH = 920;
 const CANVAS_HEIGHT = 560;
-const NUMBER_OF_STARS = 30;
 const STAR_OUTER_RADIUS = 30;
 const STAR_INNER_RADIUS = 15;
 const STAR_STROKE_COLOR = '#bbb';
