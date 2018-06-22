@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import * as roomActions from '../../actions/room-actions';
+import * as hostActions from '../../actions/host-actions';
 import * as socketActions from '../../actions/socket-actions';
 import autoBind from '../../utils';
 
@@ -17,6 +18,9 @@ class WaitingRoom extends Component {
       roomCode: null,
       playerNames: [],
       numPlayers: 0,
+      numStars: 10,
+      time: 20,
+      backgroundImageNumber: 1,
     };
     autoBind.call(this, WaitingRoom);
   }
@@ -25,8 +29,17 @@ class WaitingRoom extends Component {
     router: PropTypes.object,
   };
 
-  handleGameRedirect() {
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleStartGame() {
+    this.props.socket.emit('SET_HOSTVARS', this.props.room.code, this.state.numStars, this.state.time, this.state.backgroundImageNumber);
     this.props.socket.emit('HOST_REDIRECT', this.props.room.code);
+  }
+
+  handleInit() {
+    this.props.socket.emit('SET_HOSTVARS', this.state.numStars, this.state.time, this.state.backgroundImageNumber);
   }
 
   componentDidMount() {
@@ -60,15 +73,38 @@ class WaitingRoom extends Component {
       });
       console.log(this.state.playerNames);
     });
+
+
     this.props.socket.on('REDIRECT', () => {
       this.context.router.history.push('/game');
+    });
+
+    this.socket.on('GET_HOSTVARS', (data) => {
+      const parsedData = JSON.parse(data);
+      const { numStars, time, backgroundImageNumber } = parsedData;
+
+      this.props.setHost({
+        numStars,
+        time,
+        backgroundImageNumber,
+      });
     });
   }
 
   render() {
     console.log('WAITING PROPS', this.props);
-    const startButtonJSX = <div className='startGame'>
-      <button type='button' className='start' onClick= {this.handleGameRedirect}>START GAME</button>
+    const hostVarsJSX = <div>
+          <form id="roomcode-form" onSubmit={this.handleJoinRoom}>
+          <h3> # of Stars </h3>
+          <input name="numStars" id="numStars" placeholder='10' onChange={this.handleChange}/>
+          <h3> Time (seconds) </h3>
+          <input name="time" id="time" placeholder='20' onChange={this.handleChange}/>
+          <h3> Background Image (enter a number 1-4) </h3>
+          <input name="backgroundImageNumber" id="backgroundImageNumber" placeholder='1' onChange={this.handleChange}/>
+
+      <button type='button' className='start' onClick= {this.handleStartGame}> START GAME </button>
+      </form>
+
     </div>;
     return (
             <div>
@@ -83,7 +119,7 @@ class WaitingRoom extends Component {
             <h2> {this.state.playerNames.join(', ')} </h2>
 
 
-              {this.isHost ? startButtonJSX : undefined }
+              {this.isHost ? hostVarsJSX : undefined }
             </div>
     );
   }
@@ -92,17 +128,21 @@ class WaitingRoom extends Component {
 WaitingRoom.propTypes = {
   socket: PropTypes.object,
   setRoom: PropTypes.func,
+  setHost: PropTypes.func,
   setSocket: PropTypes.func,
   room: PropTypes.object,
+  host: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   room: state.room,
   socket: state.socket,
+  host: state.host,
 });
 
 const mapDispatchToProps = dispatch => ({
   setRoom: room => dispatch(roomActions.roomSet(room)),
+  setHost: host => dispatch(hostActions.hostSet(host)),
   setSocket: socket => dispatch(socketActions.socketSet(socket)),
 });
 
