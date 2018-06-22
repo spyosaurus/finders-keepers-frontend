@@ -14,7 +14,7 @@ class About extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='aboutpage'>
         <h2>
           Collin Meredith
         </h2>
