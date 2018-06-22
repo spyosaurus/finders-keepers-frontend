@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import routes from '../../routes';
-
+import About from '../about/about';
 import * as authActions from '../../actions/auth';
 
 class Header extends React.Component {
@@ -12,14 +13,13 @@ class Header extends React.Component {
         <h1> FINDERS KEEPERS</h1>
         <h2>A Search Game</h2>
         <nav>
-          <ul>
           <li>
-          <a href = "#">Home</a>
+            <Link to={'/'}>Home</Link>
           </li>
-            <li>
-          <a href = "#">About</a>
-            </li>
-          </ul>
+          <li>
+            <Link to={'/about'}>About</Link>
+          </li>
+
         </nav>
       </header>
     );
