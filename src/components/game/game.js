@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autoBind from '../../utils/index';
-import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
+// import crowdImage from '../../../assets/backgrounds/curran-unsplash.jpg';
 // import streetImage from '../../../assets/backgrounds/flobrant-unsplash.jpg';
 // import puzzleImage from '../../../assets/backgrounds/gauster-unsplash.jpg';
 // import greenHillsImage from '../../../assets/backgrounds/testa-unsplash.jpg';
@@ -147,11 +147,7 @@ class Game extends React.Component {
         console.log(data);
       });
     }
-    const canvasStyle = {
-      backgroundImage: `url(${crowdImage})`,
-      backgroundSize: 'cover',
-      border: '2px solid gray',
-    };
+
     const starsToFind = starPositions.length;
     return (
       <div className='game'>
@@ -159,7 +155,7 @@ class Game extends React.Component {
         <h3>Stars to Find: {starsToFind}</h3>
         <h3>Stars Found: {this.state.score}</h3>
         <canvas
-          style={canvasStyle}
+         className='gameCanvas'
           ref='canvas' // eslint-disable-line
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}
