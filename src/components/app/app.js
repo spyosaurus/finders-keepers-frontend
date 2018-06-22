@@ -11,6 +11,7 @@ import WaitingRoom from '../waiting-room/waiting-room';
 import reducers from '../../reducer/index';
 import thunk from '../../lib/redux-thunk';
 
+import About from '../about/about';
 import Header from '../header/header';
 import Game from '../game/game';
 import Scores from '../scores/scores';
@@ -41,6 +42,7 @@ class App extends Component {
                 <Route exact path='/WaitingRoom' component={WaitingRoom}/>
                 <Route exact path='/game' component={Game}/>
                 <Route exact path='/scores' component={Scores}/>
+                <Route exact path='/about' component={About}/>
             </div>
           </BrowserRouter>
         </Provider>
