@@ -11,7 +11,7 @@ const STAR_INNER_RADIUS = 15;
 const STAR_STROKE_COLOR = '#bbb';
 const STAR_STROKE_WIDTH = 3;
 const STAR_POINTS = 7;
-const starPositions = [];
+let starPositions = [];
 
 
 class Game extends React.Component {
@@ -36,6 +36,8 @@ class Game extends React.Component {
 
   setBackgroundImageNumber() {
     this.setState({ backgroundImageNumber: this.props.host.backgroundImageNumber });
+    this.setState({ time: this.props.host.time });
+    this.setState({ numStars: this.props.host.numStars });
   }
   
   handleTimerDec() {
@@ -53,9 +55,10 @@ class Game extends React.Component {
 
 
   populateStars() {
+    starPositions = [];
     let xCoord;
     let yCoord;
-    for (let i = 0; i < NUMBER_OF_STARS; i++) {
+    for (let i = 0; i < this.props.host.numStars; i++) {
       xCoord = Math.round(Math.random() * (CANVAS_WIDTH - (3 * STAR_OUTER_RADIUS)));
       yCoord = Math.round(Math.random() * (CANVAS_HEIGHT - (3 * STAR_OUTER_RADIUS)));
       starPositions.push([xCoord, yCoord]);

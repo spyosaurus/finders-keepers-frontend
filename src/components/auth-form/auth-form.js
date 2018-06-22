@@ -14,8 +14,8 @@ const emptyState = {
   passwordError: 'Password is Required!',
 };
 
-const MIN_NAME_LENGTH = 8;
-const MIN_PASSWORD_LENGTH = 8;
+const MIN_NAME_LENGTH = 3;
+const MIN_PASSWORD_LENGTH = 3;
 const MAX_PASSWORD_LENGTH = 20;
 
 class AuthForm extends React.Component {
@@ -31,13 +31,13 @@ class AuthForm extends React.Component {
     }
     switch (name) {
       case 'username':
-        if (value.length < 8) {
+        if (value.length < 3) {
           return `Your name must be at least ${MIN_NAME_LENGTH}`;
         }
         return null;
       case 'password':
         if (value.length < MIN_NAME_LENGTH || value.length > MAX_PASSWORD_LENGTH) {
-          return `Your password must be at least ${MIN_PASSWORD_LENGTH} characters long and less than ${MAX_PASSWORD_LENGTH} character long.`;
+          return `Your password must be at least ${MIN_PASSWORD_LENGTH} characters long and less than ${MAX_PASSWORD_LENGTH} characters long.`;
         }
         return null;
       default:
