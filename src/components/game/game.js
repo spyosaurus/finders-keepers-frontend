@@ -104,7 +104,6 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(this.handleTimerDec, 1000);
     const myClock = setInterval(this.handleTimerDec, 1000);
     this.setState({ clock: myClock });
     this.populateStars();
