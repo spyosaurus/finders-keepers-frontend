@@ -1,5 +1,4 @@
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -16,7 +15,7 @@ import Header from '../header/header';
 import Game from '../game/game';
 import Scores from '../scores/scores';
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(reducers, applyMiddleware(thunk));
 
 class App extends Component {
   constructor(props) {
