@@ -23,6 +23,7 @@ class Game extends React.Component {
       timeInterval: 1000,
       timeDisplay: 20,
       score: 0,
+      backgroundImageNumber: 1,
     };
 
     
@@ -33,6 +34,9 @@ class Game extends React.Component {
     router: PropTypes.object,
   };
 
+  setBackgroundImageNumber() {
+    this.setState({ backgroundImageNumber: Math.ceil(Math.random() * 4) });
+  }
   
   handleTimerDec() {
     console.log('timer working', this.state.timeDisplay);
@@ -103,6 +107,7 @@ class Game extends React.Component {
     const myClock = setInterval(this.handleTimerDec, 1000);
     this.setState({ clock: myClock });
     this.populateStars();
+    this.setBackgroundImageNumber();
     this.renderCanvas();
   }
 
@@ -145,6 +150,7 @@ class Game extends React.Component {
 
     const starsToFind = starPositions.length;
     const { backgroundImageNumber } = this.state;
+    console.log('BACKGROUND IMAGE NUMBER ', backgroundImageNumber);
     const canvasClassName = ` gameCanvas img${backgroundImageNumber}`;
     return (
       <div className='game'>
