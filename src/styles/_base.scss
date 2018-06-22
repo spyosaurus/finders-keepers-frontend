@@ -131,15 +131,20 @@ strong {
 }
 
 .aboutpage {
-    border-top: thick groove $accent-color-1;
-
-  p {
-    max-width: 600px;
-    margin-top: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  border-top: thick groove $accent-color-1;
+h2 {
+  font-family: 'Poiret One', sans-serif;
+  font-weight: 900;
 }
+p {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin-top: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+}
+
 .about {
   margin-right: 20%;
 }

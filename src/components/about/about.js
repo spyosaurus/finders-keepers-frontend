@@ -1,9 +1,9 @@
 import React from 'react';
 
-import wyattpic from '../../../assets/wyattpic.jpg';
-import collinpic from '../../../assets/collinpic.jpg';
-import caraface from '../../../assets/caraface.jpg';
-import jenniferpic from '../../../assets/jenniferpic.jpg';
+// import wyattpic from '../../../assets/wyattpic.jpg';
+// import collinpic from '../../../assets/collinpic.jpg';
+// import caraface from '../../../assets/caraface.jpg';
+// import jenniferpic from '../../../assets/jenniferpic.jpg';
 
 class About extends React.Component {
   constructor(props) {
@@ -45,8 +45,8 @@ class About extends React.Component {
         </h2>
         <p className="about">
          Wyatt is a full-stack JavaScript developer from Montana. 
-         When he is not coding he like to make music, go to concerts and festivals, 
-         snowboard, and enjoy a pint of Guiness.
+         When he is not coding he likes to make music, go to concerts and festivals, 
+         snowboard, and enjoy a pint of Guinness.
         </p>
       </div>
     );  
