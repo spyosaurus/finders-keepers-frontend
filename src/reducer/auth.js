@@ -4,7 +4,6 @@ export default (state = null, action) => {
 
   switch (type) {
     case 'TOKEN_SET': {
-      console.log('TOKEN', payload);
       return payload;
     }
     case 'TOKEN_DELETE': return null;

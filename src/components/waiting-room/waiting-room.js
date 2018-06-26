@@ -43,7 +43,6 @@ class WaitingRoom extends Component {
   }
 
   componentDidMount() {
-    console.log('PROPS IN WAITING ROOM', this.props);
     if (this.isHost) {
       this.socket.emit('CREATE_ROOM', this.props.room.username);
 
@@ -59,10 +58,7 @@ class WaitingRoom extends Component {
         });
 
         this.setState({ roomCode });
-
         this.props.setSocket(this.socket);
-
-        console.log('ROOM CODE', this.props.room.code);
       });
     }
 
@@ -71,7 +67,6 @@ class WaitingRoom extends Component {
         numPlayers: num,
         playerNames: list,
       });
-      console.log(this.state.playerNames);
     });
 
 
@@ -92,7 +87,6 @@ class WaitingRoom extends Component {
   }
 
   render() {
-    console.log('WAITING PROPS', this.props);
     const hostVarsJSX = <div>
           <form id="roomcode-form" onSubmit={this.handleJoinRoom}>
           <h3> # of Stars </h3>

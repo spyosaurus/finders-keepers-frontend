@@ -14,14 +14,14 @@
 
 ## Description
 
-Finder's Keepers is a competitive, multi-player, brain-game. Users have a certain amount of time to find and click as many stars as they can before their competitors. The user who is able to find the most items in the alloted time limit is declared the winner.
+Finder's Keepers is a competitive, multi-player brain-game. Users have a certain amount of time to find and click as many stars as they can before their competitors. The user who is able to find the most items in the alloted time limit is declared the winner.
 
 ## Build Status
 
 [![Build Status](https://travis-ci.org/spyosaurus/finders-keepers-frontend.svg?branch=master)](https://travis-ci.org/spyosaurus/finders-keepers-frontend)
 
 ## Architecture
-Finder's Keepers is a full-stack application, utilizing the following:
+Finder's Keepers is a full-stack JavaScript application, utilizing the following:
 
 - Code Style: Airbnb
 - Test Suite: Jest
@@ -89,6 +89,6 @@ Players join a socket when they click "host" or "join" and after they have signe
 Cara Ottmar, Collin Meredith, Jennifer Piper and Wyatt Pefley
 
 ## Credits 
-- Heith Smith
+- Thanks to Heath Smith for helping us debug the socket.io functionality.
 
 License: MIT

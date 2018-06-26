@@ -23,7 +23,7 @@ class Landing extends React.Component {
 
   static contextTypes = {
     router: PropTypes.object,
-  }
+  };
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -64,7 +64,6 @@ class Landing extends React.Component {
   }
 
   handleCreateRoom(event) {
-    console.log('TOKEN', this.props.token);
     if (this.props.token) {
       event.preventDefault();
       this.props.setRoom({
@@ -101,8 +100,6 @@ class Landing extends React.Component {
   }
 
   render() {
-    console.log('PROPS IN LANDING', this.props);
-
     const joinRoomJSX = <div>
           <form id="roomcode-form" onSubmit={this.handleJoinRoom}>
           <h3>Choose a Username</h3>
@@ -142,7 +139,6 @@ class Landing extends React.Component {
     );
   }
 }
-
 
 Landing.propTypes = {
   socket: PropTypes.object,

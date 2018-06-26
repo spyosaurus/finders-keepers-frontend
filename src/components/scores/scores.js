@@ -12,7 +12,6 @@ class Scores extends React.Component {
 
     autoBind.call(this, Scores);
   }
-  
 
   componentDidMount() {
     this.props.socket.emit('UPDATE_SCORES', this.props.room.code);
@@ -37,12 +36,7 @@ class Scores extends React.Component {
       }
 
       const finalScoreString = scoreString.split('\n').map((element, i) => <p key={i}>{element}</p>);
-
-
       this.setState({ scores: finalScoreString });
-
-      console.log(scoreString);
-      console.log('scorestring', this.state.scores);
     });
   }
 

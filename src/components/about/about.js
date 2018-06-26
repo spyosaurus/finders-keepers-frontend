@@ -1,10 +1,5 @@
 import React from 'react';
 
-// import wyattpic from '../../../assets/wyattpic.jpg';
-// import collinpic from '../../../assets/collinpic.jpg';
-// import caraface from '../../../assets/caraface.jpg';
-// import jenniferpic from '../../../assets/jenniferpic.jpg';
-
 class About extends React.Component {
   constructor(props) {
     super(props);

@@ -61,7 +61,6 @@ class AuthForm extends React.Component {
     } = this.state;
 
     if (this.props.type === 'login' || (!usernameError && !passwordError)) {
-      console.log('AUTH FORM USERNAME', this.state.username);
       this.props.setRoom({ username: this.state.username });
 
       this.props.onComplete(this.state);

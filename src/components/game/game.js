@@ -40,13 +40,10 @@ class Game extends React.Component {
   }
   
   handleTimerDec() {
-    console.log('timer working', this.state.timeDisplay);
     if (this.state.timeDisplay > 0) {
       this.setState({ timeDisplay: this.state.timeDisplay - 1 });
     } else {
-      console.log('clock', this.state.clock);
       clearInterval(this.state.clock);
-      console.log('TIME OUT REACHED');
       this.props.socket.emit('TIME_OVER', this.props.room.code, this.state.score, this.props.room.username); 
       this.context.router.history.push('/scores');
     }
@@ -143,16 +140,8 @@ class Game extends React.Component {
   }
 
   render() {
-    console.log('GAME PROPS', this.props);
-    if (this.props.socket) {
-      this.props.socket.on('RECEIVE_MESSAGE', (data) => {
-        console.log(data);
-      });
-    }
-
     const starsToFind = starPositions.length;
     const { backgroundImageNumber } = this.state;
-    console.log('BACKGROUND IMAGE NUMBER ', backgroundImageNumber);
     const canvasClassName = ` gameCanvas img${backgroundImageNumber}`;
     return (
       <div className='game'>
