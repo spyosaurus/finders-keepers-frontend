@@ -311,9 +311,6 @@ p, h1, h2, h3, ul {
   font-family: 'Poiret One', sans-serif;
   color: rgba(0, 0, 0, 0.8); }
 
-ul {
-  padding-left: 0; }
-
 h1 + p {
   margin-top: 0; }
 
@@ -327,6 +324,9 @@ h1, h2 {
 h2 {
   font-family: sans-serif;
   font-weight: normal; }
+
+ul {
+  padding-left: 0; }
 
 .error {
   color: #f00; }
@@ -398,13 +398,6 @@ strong {
 
 .gameCanvas.img4 {
   background-image: url(https://raw.githubusercontent.com/spyosaurus/finders-keepers-frontend/master/assets/backgrounds/testa-unsplash.jpg); }
-
-.aboutpage img {
-  border-radius: 50%;
-  height: 150px;
-  width: 150px;
-  margin-left: 84%;
-  margin-top: -12%; }
 
 .aboutpage {
   border-top: thick groove #D876FF; }
