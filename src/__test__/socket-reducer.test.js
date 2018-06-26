@@ -6,7 +6,7 @@ describe('Testing the socketReducer', () => {
   };
   test('testing the default state functionality', () => {
     const testAction = {
-      type: '', // not specified
+      type: '',
       payload: testState.profile,
     };
     expect(socketReducer(testState, testAction)).toEqual(testState);

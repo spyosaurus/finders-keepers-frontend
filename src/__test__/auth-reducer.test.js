@@ -6,7 +6,7 @@ describe('Testing the authReducer', () => {
   };
   test('testing the default state functionality', () => {
     const testAction = {
-      type: '', // not specified
+      type: '',
       payload: testState.profile,
     };
     expect(authReducer(testState, testAction)).toEqual(testState);

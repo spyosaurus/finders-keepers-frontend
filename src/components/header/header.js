@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import routes from '../../routes';
-import About from '../about/about';
 import * as authActions from '../../actions/auth';
 
 class Header extends React.Component {
