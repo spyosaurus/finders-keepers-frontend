@@ -57,16 +57,4 @@ webpackConfig.module.rules = [
       },
     },
   },
-  {
-    test: /\.(jpg|jpeg|gif|png|tiff|svg)$/,
-    exclude: /\.glyph.svg/,
-    use: [
-      {
-        loader: 'file-loader',
-        options: {
-          name: 'assets/[name].[ext]',
-        },
-      },
-    ],
-  },
 ];
